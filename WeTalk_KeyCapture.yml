@@ -1,0 +1,27 @@
+name: "WeTalk 账号抓取"
+description: "抓取 WeTalk 登录 token 并保存，供签到模块使用。"
+author: "TG@ZenMoFiShi (Egern port)"
+icon: "key.fill"
+
+env_schema:
+  CAPTURE_ENABLED:
+    name: "账号抓取 - 启用"
+    description: "关闭后抓包脚本不再处理任何请求"
+    options:
+      - "true"
+      - "false"
+    default_value: "true"
+
+mitm:
+  hostnames:
+    - "api.wetalkapp.com"
+
+http_captures:
+  - "api.wetalkapp.com"
+
+scriptings:
+  - http_request:
+      name: "WeTalk 账号抓取"
+      match: "^https://api\\.wetalkapp\\.com/app/queryBalanceAndBonus"
+      script_url: "https://github.com/158212892/QuantumultXMark/raw/refs/heads/main/My/Scripts/WeTalk_capture.js"
+      timeout: 10
